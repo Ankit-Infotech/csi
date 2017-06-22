@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- inherit search view -->
+    <record id="csi_purchase_order_filter_inherit" model="ir.ui.view">
+        <field name="name">csi.purchase.order.filter.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+            <search>
+                <group expand="0" string="Group By">
+                    <filter name="by_date" string="By Day" domain="[]" context="{'group_by':'by_date'}"/>
+                    <filter name="by_week" string="By Week" domain="[]" context="{'group_by':'by_week'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <!-- end of code -->
+
+    <!-- inherit form view -->
+    <record id="csi_purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">csi.purchase.order.form.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_order']" position="after">
+                <field name="change_order_date" invisible="1"/>
+                <field name="by_date" invisible="1"/>
+                <field name="by_week" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+    <!-- end of code -->
+
+    <!-- inherit tree view -->
+    <record id="csi_purchase_order_tree_inherit" model="ir.ui.view">
+        <field name="name">csi.purchase.order.tree.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="change_order_date" invisible="1"/>
+                <field name="by_date" invisible="1"/>
+                <field name="by_week" invisible="1"/>
+            </field>
+        </field>
+    </record>
+    <!-- end of code -->
+
+</odoo>

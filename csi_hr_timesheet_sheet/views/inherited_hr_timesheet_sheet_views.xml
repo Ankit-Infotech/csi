@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="inherited_hr_timesheet_sheet_form_inherit_csi_hr_timesheet_sheet" model="ir.ui.view">
+        <field name="name">inherited.hr.timesheet.sheet.form.inherit.csi.hr.timesheet.sheet</field>
+        <field name="model">hr_timesheet_sheet.sheet</field>
+        <field name="inherit_id" ref="hr_timesheet_sheet.hr_timesheet_sheet_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_timesheet_done']" position="replace">
+                <button name="action_timesheet_done" string="Approve" type="object" groups="hr_timesheet.group_hr_timesheet_user" class="oe_highlight"
+                        attrs="{'invisible':['|',('state','!=','confirm'),('own_user','=', True)]}"/> <!-- Hide Approve button when current user look, own timesheet.-->
+            </xpath>
+            <xpath expr="//field[@name='employee_id']" position="after">
+                <field name="own_user" invisible="1"/> <!-- New boolean functional field -->
+            </xpath>
+        </field>
+    </record>
+</odoo>
