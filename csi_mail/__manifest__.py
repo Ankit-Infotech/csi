@@ -13,6 +13,7 @@ This module contain below feature:
 * Email would be send like @username in log an internal note.
     - condition like:
     - users_rec= self.env['res.users'].search([('name','=',username)]).
+* Recipients email id will be display on chatter when send email button click.
 * Example like:
     @Administrator do following things,
     1.Read docs.

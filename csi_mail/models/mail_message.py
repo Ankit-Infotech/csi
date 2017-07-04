@@ -30,3 +30,24 @@ class Message(models.Model):
                     mail_id = self.env['mail.mail'].create(mail_values)
                     mail_id.send()
         return res
+
+class MailComposeMessage(models.TransientModel):
+    _inherit = 'mail.compose.message'
+
+    # email id of the receipient will be appear in chatter # 1127
+    @api.multi
+    def get_mail_values(self, res_ids):
+        partner_obj = self.env['res.partner']
+        res = super(MailComposeMessage, self).get_mail_values(res_ids)
+        Partners = False
+        for res_id in res_ids:
+            result = res[res_id]
+            Partners = result.get('partner_ids')
+            update_body = ''
+            if Partners:
+                for partner_rec in partner_obj.browse(Partners):
+                    update_body += partner_rec.name +' :- '+ partner_rec.email + u'<br/>'
+            if update_body:
+                result.update({'body':update_body + result.get('body')})
+        return res
+    # End of code
