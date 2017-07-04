@@ -34,7 +34,7 @@ class Message(models.Model):
 class MailComposeMessage(models.TransientModel):
     _inherit = 'mail.compose.message'
 
-    # email id of the receipient will be appear in chatter # 1127
+    # email id of the receipient will be appear in chatter # 1127  
     @api.multi
     def get_mail_values(self, res_ids):
         partner_obj = self.env['res.partner']
